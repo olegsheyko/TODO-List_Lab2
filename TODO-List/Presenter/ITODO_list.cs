@@ -2,7 +2,8 @@
 
 public interface ITODO_list
 {
-    void addTask(string title, string description, DateTime dateTime, string[] tags);
-    SingleTask SearchTask(string tag);
+    void addTask(SingleTask t, IList<string> tags);
+    bool SearchTask(string tag);
+    void lastTask();
 
 }
