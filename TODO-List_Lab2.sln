@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TODO-List", "TODO-List\TODO-List.csproj", "{BFAA679F-7CB8-46F6-B9AA-E288A35AA1B6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoList", "TodoList\TodoList.csproj", "{BFAA679F-7CB8-46F6-B9AA-E288A35AA1B6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestForTODO", "TestForTODO\TestForTODO.csproj", "{7C39B5BA-FFFE-489F-A572-B5AFF55EC448}"
 EndProject
