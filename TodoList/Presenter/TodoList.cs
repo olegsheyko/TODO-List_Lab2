@@ -1,15 +1,23 @@
-﻿namespace TODO_List.Presenter
+﻿using System.Text.Json;
+using System.Xml.Serialization;
+using TODO_List.AppContext;
+using TODO_List.Model;
+
+namespace TODO_List.Presenter
 {
-    public class TODO_list : ITODO_list
+    public class TodoList : ITODO_list
     {
         // Приватное свойство для хранения задач, представленных в виде словаря
-        private Dictionary<string, List<SingleTask>> tasks { get; }
+        private Dictionary<string, List<SingleTask>> tasks { get; set; }
 
         // Конструктор класса, инициализирует словарь задач
-        public TODO_list()
+        
+        public TodoList(IDataManager db)
         {
-            tasks = new Dictionary<string, List<SingleTask>>();
+            tasks = db.LoadFromDB();
         }
+        
+        
 
         // Метод для получения задач из класса
         public Dictionary<string, List<SingleTask>> getTasks()
@@ -46,7 +54,7 @@
             // Если задач с указанным тегом не существует, вывести сообщение и вернуть false
             if (!tasks.ContainsKey(tag))
             {
-                Console.WriteLine("No tag");
+                Console.WriteLine("No tasks with these tags!");
                 return false;
             }
             
@@ -56,8 +64,11 @@
             // Если список задач пуст, вернуть false
             if (!singleTasks.Any())
             {
+                Console.WriteLine("Empty TODO list!");
                 return false;
             }
+
+            Console.WriteLine("Tasks with tag " + tag + ":\n");
             
             // Вывод задач с указанным тегом
             for(var i = 0; i < singleTasks.Count; i++)
@@ -88,5 +99,6 @@
                 t.PrintTask();
             }
         }
+
     }
 }

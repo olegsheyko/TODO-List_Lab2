@@ -9,9 +9,13 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Extensions" />
-      <Folder Include="Model" />
-      <Folder Include="View" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.13" />
+      <PackageReference Include="NSubstitute" Version="5.1.0" />
+      <PackageReference Include="System.Text.Json" Version="7.0.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Services" />
     </ItemGroup>
 
 </Project>

@@ -1,17 +1,23 @@
-﻿namespace TODO_List.Presenter
+﻿using System.Runtime.Serialization;
+
+namespace TODO_List.Presenter
 {
     public class SingleTask
     {
         // Определение свойства для хранения заголовка задачи
+        [DataMember]
         public string title { get; set; }
 
         // Определение свойства для хранения описания задачи
+        [DataMember]
         public string description { get; set; }
 
         // Определение свойства для хранения даты задачи
+        [DataMember]
         public DateTime date { get; set; }
 
         // Определение свойства для хранения списка тегов задачи
+        [DataMember]
         public List<string> tags { get; set; }
 
         // Конструктор класса, принимающий заголовок, описание, дату и список тегов в качестве параметров
@@ -44,6 +50,9 @@
             }
 
             Console.WriteLine();
+            Console.WriteLine("-----------");
         }
+        
+        
     }
 }
