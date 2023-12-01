@@ -2,6 +2,6 @@
 
 public interface IDataManager
 {
-    public Dictionary<string, List<SingleTask>> LoadFromDB();
-    void SaveToDB(TodoList list);
+    Dictionary<string, List<SingleTask>> LoadFromDB();
+    Task SaveToDB(TodoList list);
 }

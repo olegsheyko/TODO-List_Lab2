@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using Moq;
-using NSubstitute;
 using TODO_List.AppContext;
 using TODO_List.Model;
 using TODO_List.Presenter;
@@ -66,7 +65,7 @@ namespace TestForTODO
             var result = todoList.SearchTask("NonExistingTag");
 
             // Assert
-            Assert.False(result);
+            Assert.False(result.Any());
         }
 
         // Тест проверяет возвращение true при поиске существующего тега с задачами.
@@ -87,7 +86,7 @@ namespace TestForTODO
             var result = todoList.SearchTask("ExistingTag");
 
             // Assert
-            Assert.True(result);
+            Assert.True(result.Any());
         }
 
         // Тест проверяет возвращение false при поиске существующего тега без задач.
@@ -104,7 +103,7 @@ namespace TestForTODO
             var result = todoList.SearchTask("ExistingTag");
 
             // Assert
-            Assert.False(result);
+            Assert.False(result.Any());
         }
         
         // Тест проверяет добавление задачи.
@@ -170,14 +169,14 @@ namespace TestForTODO
             var resultFor2 = tdlist2.SearchTask(searchTag2);
             
             Assert.True(tdlist2.getTasks().Count() == 0);
-            Assert.True(tdlist1.SearchTask(searchTag1));
-            Assert.False(tdlist2.SearchTask(searchTag2));
+            Assert.True(resultFor1.Any());
+            Assert.False(resultFor2.Any());
             Assert.NotEqual(resultFor1, resultFor2);
             
             var tdlist3 = new TodoList(mock1.Object);
             var resultFor3 = tdlist3.SearchTask(searchTag2);
             
-            Assert.True(resultFor3);
+            Assert.True(resultFor3.Any());
         }
             
     }

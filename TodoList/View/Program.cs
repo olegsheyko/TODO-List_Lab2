@@ -1,9 +1,10 @@
-﻿using TODO_List.Model;
+﻿using TODO_List.AppContext;
+using TODO_List.Model;
 using TODO_List.Presenter;
 
 
 
-var database = new DatabaseConnection();
+var database = new DatabaseConnection(new TodoContext());
 var test_TODO = new TodoList(database);
 
 

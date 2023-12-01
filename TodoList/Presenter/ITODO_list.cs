@@ -3,7 +3,8 @@
 public interface ITODO_list
 {
     void addTask(SingleTask t, IList<string> tags);
-    bool SearchTask(string tag);
+    List<SingleTask> SearchTask(string tag);
     void lastTask();
+    Dictionary<string, List<SingleTask>> getTasks();
 
 }

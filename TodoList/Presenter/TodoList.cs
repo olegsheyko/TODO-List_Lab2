@@ -49,7 +49,7 @@ namespace TODO_List.Presenter
         }
 
         // Метод для поиска и вывода задач с указанным тегом
-        public bool SearchTask(string tag)
+        /*public bool SearchTask(string tag)
         {
             // Если задач с указанным тегом не существует, вывести сообщение и вернуть false
             if (!tasks.ContainsKey(tag))
@@ -76,6 +76,27 @@ namespace TODO_List.Presenter
                 singleTasks[i].PrintTask();
             }
             return true;
+        }*/
+        
+        public List<SingleTask> SearchTask(string tag)
+        {
+            // Если задач с указанным тегом не существует, вывести сообщение и вернуть пустой список
+            if (!tasks.ContainsKey(tag))
+            {
+                Console.WriteLine("No tasks with these tags!");
+                return new List<SingleTask>();
+            }
+
+            // Получение списка задач с указанным тегом
+            var singleTasks = tasks[tag];
+
+            // Если список задач пуст, вывести сообщение
+            if (!singleTasks.Any())
+            {
+                Console.WriteLine("Empty TODO list!");
+            }
+
+            return singleTasks.ToList();
         }
 
         // Метод для вывода всех задач, уникальных по тегам
