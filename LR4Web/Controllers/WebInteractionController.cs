@@ -1,7 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using TODO_List.Model;
 using TODO_List.Presenter;
-
+using TODO_List.Repositories;
 
 
 namespace LR4Web.Controllers;
@@ -10,44 +14,31 @@ namespace LR4Web.Controllers;
 [Route("[controller]")]
 public class SmthController: ControllerBase
 {
-    private readonly ITODO_list _todoList;
-    private readonly IDataManager _dataManager;
+    private readonly ITodoRepository _repository;
     
-    public SmthController()
+    public SmthController(ITodoRepository repository)
     {
-        
+        _repository = repository;
     }
     
     [HttpGet] [Route("/search-task-by-tag")]
     public async Task<List<SingleTask>> Search([FromQuery] string tag)
     {
-        var d = _todoList.SearchTask(tag);
-        return await Task.FromResult(d);
+        return await _repository.SearchTask(tag);
 
     }
 
     [HttpPost]
     [Route("/add-new-task")]
-    public async Task<IActionResult> AddTodoTask([FromBody] SingleTaskDto task)
+    public Task AddTodoTask([FromBody] SingleTaskDto task)
     {
-        var title = task.title;
-        var description = task.description;
-        var date = DateTime.Parse(task.date);
-        var tags = task.tags.Split(',').ToList();
-        
-        var t = new SingleTask(title, description, date, tags);
-
-        _todoList.addTask(t,tags);
-        _dataManager.SaveToDB(_todoList as TodoList);
-        
-        return Ok();
+        return _repository.AddTodoTask(task);
     }
 
     [HttpGet]
     [Route("/show-last-tasks")]
     public async Task<ActionResult<Dictionary<string, List<SingleTask>>>> LastTasks()
     {
-        var d = _todoList.getTasks();
-        return await Task.FromResult(d);
+        return await _repository.LastTasks();
     }
 }
