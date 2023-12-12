@@ -13,10 +13,9 @@ public class SmthController: ControllerBase
     private readonly ITODO_list _todoList;
     private readonly IDataManager _dataManager;
     
-    public SmthController(ITODO_list todoList, IDataManager dataManager)
+    public SmthController()
     {
-        _todoList = todoList;
-        _dataManager = dataManager;
+        
     }
     
     [HttpGet] [Route("/search-task-by-tag")]
