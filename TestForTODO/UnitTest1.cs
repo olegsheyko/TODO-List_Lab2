@@ -1,7 +1,4 @@
-using Microsoft.EntityFrameworkCore;
 using Moq;
-using TODO_List.AppContext;
-using TODO_List.Model;
 using TODO_List.Presenter;
 using Xunit;
 

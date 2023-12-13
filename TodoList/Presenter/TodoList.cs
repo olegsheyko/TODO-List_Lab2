@@ -1,8 +1,4 @@
-﻿using System.Text.Json;
-using System.Xml.Serialization;
-using TODO_List.AppContext;
-using TODO_List.Model;
-
+﻿
 namespace TODO_List.Presenter
 {
     public class TodoList : ITODO_list
@@ -28,6 +24,7 @@ namespace TODO_List.Presenter
         // Метод для добавления задачи в список с указанными тегами
         public void addTask(SingleTask t, IList<string> tags)
         {
+            
             // Перебор всех переданных тегов
             for (var i = 0; i < tags.Count; i++)
             {
@@ -47,36 +44,7 @@ namespace TODO_List.Presenter
                 tasks[tag].Add(t);
             }
         }
-
-        // Метод для поиска и вывода задач с указанным тегом
-        /*public bool SearchTask(string tag)
-        {
-            // Если задач с указанным тегом не существует, вывести сообщение и вернуть false
-            if (!tasks.ContainsKey(tag))
-            {
-                Console.WriteLine("No tasks with these tags!");
-                return false;
-            }
-            
-            // Получение списка задач с указанным тегом
-            var singleTasks = tasks[tag];
-
-            // Если список задач пуст, вернуть false
-            if (!singleTasks.Any())
-            {
-                Console.WriteLine("Empty TODO list!");
-                return false;
-            }
-
-            Console.WriteLine("Tasks with tag " + tag + ":\n");
-            
-            // Вывод задач с указанным тегом
-            for(var i = 0; i < singleTasks.Count; i++)
-            {
-                singleTasks[i].PrintTask();
-            }
-            return true;
-        }*/
+        
         
         public List<SingleTask> SearchTask(string tag)
         {

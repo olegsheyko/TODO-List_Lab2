@@ -3,7 +3,6 @@ using TODO_List.Model;
 using TODO_List.Presenter;
 
 
-
 var database = new DatabaseConnection(new TodoContext());
 var test_TODO = new TodoList(database);
 
@@ -70,5 +69,4 @@ while (work_work)
             break;
     }
 }
-
 
