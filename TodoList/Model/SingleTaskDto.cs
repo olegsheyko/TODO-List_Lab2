@@ -1,27 +1,47 @@
 ﻿using System.ComponentModel;
 using System.Text.Json.Serialization;
-using TODO_List.Presenter;
+using ReactiveUI;
 
 namespace TODO_List.Model;
 
-public class SingleTaskDto
+public class SingleTaskDto : ReactiveObject
 {
     [JsonIgnore]
     public ulong id { get; set; }
+
+    public string _title;
+    public string _description;
+    public string _date;
+    public string _tags;
     
     [DefaultValue("task title")]
-    public string title { get; set; }
+    public string title
+    {
+        get { return _title; }
+        set
+        {
+            this.RaiseAndSetIfChanged(ref _title, value);
+        }
+    }
 
     // Определение свойства для хранения описания задачи
-    [DefaultValue("This is my new task")]
-    public string description { get; set; }
+    public string description
+    {
+        get => _description;
+        set => this.RaiseAndSetIfChanged(ref _description, value);
+    }
 
-    // Определение свойства для хранения даты задачи
-    [DefaultValue("01.01.2023")]
-    public string date { get; set; }
+    public string date
+    {
+        get => _date;
+        set => this.RaiseAndSetIfChanged(ref _date, value);
+    }
 
-    // Определение свойства для хранения списка тегов задачи
-    [DefaultValue("Default")]
-    public string tags { get; set; }
+    public string tags
+    {
+        get => _tags;
+        set => this.RaiseAndSetIfChanged(ref _tags, value);
+    }
+    
 
 }

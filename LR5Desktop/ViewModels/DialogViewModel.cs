@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Reactive;
-using Avalonia.Controls;
+using LR5Desktop.Models;
 using LR5Desktop.Views;
 using ReactiveUI;
 
@@ -15,11 +14,21 @@ public class DialogViewModel: ViewModelBase
 
     private TodoViewModel _todoViewModel;
     private DialogWindow _dialog;
+    private ActionType _actionType;
 
-    public DialogViewModel(TodoViewModel todoVM, DialogWindow dialog)
+    public DialogViewModel(TodoViewModel todoVM, DialogWindow dialog, ActionType actionType)
     {
         _todoViewModel = todoVM;
         _dialog = dialog;
+        _actionType = actionType;
+        
+        if (_actionType == ActionType.edit && _todoViewModel.SelectedTask != null)
+        {
+            Title = _todoViewModel.SelectedTask.title;
+            Description = _todoViewModel.SelectedTask.description;
+            Date = _todoViewModel.SelectedTask.date;
+            Tags = _todoViewModel.SelectedTask.tags;
+        }
     }
     
 
@@ -38,7 +47,15 @@ public class DialogViewModel: ViewModelBase
     public string Date
     {
         get => _date;
-        set => this.RaiseAndSetIfChanged(ref _date, value);
+        set
+        {
+            if (DateTime.TryParse(value, out DateTime parsedDate))
+            {
+                // Форматируем дату в нужный вид
+                _date = parsedDate.ToString("dd.MM.yyyy");
+                this.RaiseAndSetIfChanged(ref _date, _date);
+            }
+        }
     }
     
     public string Tags
@@ -48,12 +65,17 @@ public class DialogViewModel: ViewModelBase
     }
     
     public void AddTask()
-    {   
-        _todoViewModel.AddTask(_title, _description, _date, _tags);
+    {
+        switch (_actionType)
+        {
+            case ActionType.add: 
+                _todoViewModel.AddTask(_title, _description, _date, _tags);
+                break;
+            case ActionType.edit:
+                _todoViewModel.EditTask(_title, _description, _date, _tags);
+                break;
+        }
         _dialog.Close();
         
     }
-    
-    
-    
 }

@@ -7,21 +7,23 @@
         x:Class="LR5Desktop.Views.DialogWindow"
         x:DataType="viewModels:DialogViewModel"
         Title="Добавить новую задачу" 
+        Icon="/Assets/background.ico"
         SizeToContent="WidthAndHeight"
+        CanResize="False"
         WindowStartupLocation="CenterOwner">
     
     
     <StackPanel Margin="10">
                 <TextBlock Text="Title:"></TextBlock>
                 <TextBox Text="{Binding Title, Mode=TwoWay}" Margin="0,0,0,10" 
-                         Watermark="Название задачи"></TextBox>
+                         Watermark="Название задачи" TextWrapping="Wrap"></TextBox>
 
                 <TextBlock Text="Description:"></TextBlock>
                 <TextBox Text="{Binding Description, Mode=TwoWay}" Margin="0,0,0,10"
-                         Watermark="Описание задачи"></TextBox>
+                         Watermark="Описание задачи" TextWrapping="WrapWithOverflow"></TextBox>
 
                 <TextBlock Text="Date:"></TextBlock>
-                <DatePicker SelectedDate="{Binding Date, Mode=TwoWay}" Margin="0,0,0,10"></DatePicker>
+                <DatePicker SelectedDate="{Binding Date, Mode=TwoWay}" Margin="0,0,0,10" DayFormat="ddd dd"></DatePicker>
 
                 <TextBlock Text="Tags:"></TextBlock>
                 <TextBox Text="{Binding Tags, Mode=TwoWay}" Margin="0,0,0,10"

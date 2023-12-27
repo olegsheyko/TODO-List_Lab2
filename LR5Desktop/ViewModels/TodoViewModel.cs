@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
 using DynamicData;
+using LR5Desktop.Models;
 using LR5Desktop.Views;
 using ReactiveUI;
 using TODO_List.AppContext;
@@ -44,10 +45,10 @@ public class TodoViewModel : ViewModelBase
         TaskList.AddRange(t); 
     }
 
-    public void ShowAddTaskDialog()
+    public void ShowAddTaskDialog(ActionType actionType)
     {
         var dialog = new DialogWindow();
-        dialog.DataContext = new DialogViewModel(this, dialog);
+        dialog.DataContext = new DialogViewModel(this, dialog, actionType);
         
         dialog.Show();
     }
@@ -65,6 +66,21 @@ public class TodoViewModel : ViewModelBase
         TaskList.Add(newTask);
         _dbConnection.SaveToDB(TaskList);
         SelectedTask = newTask;
+    }
+    
+    public void EditTask(string Title, string Description, string Date, string Tags)
+    {
+        SelectedTask.title = Title;
+        SelectedTask.description = Description;
+        SelectedTask.date = Date;
+        SelectedTask.tags = Tags;
+        _dbConnection.SaveToDB(TaskList);
+    }
+    
+    public void DeleteTask()
+    {
+        TaskList.Remove(SelectedTask);
+        _dbConnection.SaveToDB(TaskList);
     }
     
 }
