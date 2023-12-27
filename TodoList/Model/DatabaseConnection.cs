@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Collections.ObjectModel;
+using System.Text.Json;
 using TODO_List.AppContext;
 using TODO_List.Presenter;
 
@@ -36,6 +37,7 @@ public class DatabaseConnection : IDataManager
         
             // Удаление старых задач
             _context.Tasks.RemoveRange(_context.Tasks);
+            await _context.SaveChangesAsync();
 
             var _tasks = list.getTasks();
 
@@ -46,6 +48,18 @@ public class DatabaseConnection : IDataManager
             await _context.SaveChangesAsync();
         
     }
+    
+    public async Task SaveToDB(ObservableCollection<SingleTaskDto> list)
+    {
+        // Удаление старых задач
+        _context.Tasks.RemoveRange(_context.Tasks);
+        await _context.SaveChangesAsync();
+
+        // Добавление новых задач
+        _context.Tasks.AddRange(list);
+        await _context.SaveChangesAsync();
+    }
+
 
     
     private SingleTaskDto ReVisualise(SingleTask t)

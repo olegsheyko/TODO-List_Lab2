@@ -1,0 +1,83 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:LR5Desktop.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="LR5Desktop.Views.MainWindow"
+        x:DataType="vm:TodoViewModel"
+        Icon="/Assets/task-icon.ico"
+        Title="LR5Desktop"
+        Background="Transparent"
+        TransparencyLevelHint="AcrylicBlur"
+        WindowStartupLocation="CenterOwner">
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:TodoViewModel/>
+    </Design.DataContext>
+    
+    
+    <Grid RowDefinitions="*" ColumnDefinitions="Auto,*">
+    <!-- ListBox с шириной 300 пикселей -->
+    <Grid>
+        <Border Background="Black" Opacity="150" Width="300" Height="10000" VerticalAlignment="Top" />
+        <ListBox ItemsSource="{Binding TaskList}" 
+                 SelectedItem="{Binding SelectedTask}" 
+                 Width="300"
+                 Background="Transparent"
+                 BorderBrush="Transparent"
+                 Margin="0,20,0,0">
+            <ListBox.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Редактировать"/>
+                    <MenuItem Header="Добавить задачу" Command="{Binding ShowAddTaskDialog}"/>
+                </ContextMenu>
+            </ListBox.ContextMenu>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="#7279FF" BorderThickness="0" CornerRadius="10" Margin="5">
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,0%">
+                                <GradientStop Color="#A6BDD3" Offset="0"/>
+                                <GradientStop Color="#bdc3c7" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="{Binding title}" FontWeight="Bold" Margin="10"/>
+                            <TextBlock Text="{Binding description}" Margin="10,0,10,10" Grid.Row="1"/>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+
+    <!-- Панель для отображения деталей выбранного элемента -->
+    <Grid Column="1">
+        <Border Background="#F1F1F1" Opacity="108" Width="10000" Height="10000" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0, 0, 0, 0" />
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel Grid.Column="1" Margin="10">
+                <TextBlock Text="{Binding SelectedTask.title, FallbackValue='Задача не выбрана'}" 
+                           FontWeight="Bold" FontSize="36" Margin="10,20,0,15"/>
+                <Rectangle Width="800" Height="2" Fill="Black" Margin="10,0,0,15" HorizontalAlignment="Left"/>
+                <TextBlock Text="{Binding SelectedTask.description, FallbackValue='Выберите элемент в списке слева.'}" 
+                           FontSize="26" Margin="10,0,0,10" />
+                <TextBlock Text="{Binding SelectedTask.date}" FontSize="26" Margin="10,0,0,10" />
+                <TextBlock Text="{Binding SelectedTask.tags}" FontSize="26" Margin="10,0,0,25" />
+                <Button Content="Редактировать" IsVisible="{Binding IsSelected}" Margin="10,0,0,25" />
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Grid>
+
+
+    
+    
+
+</Window>

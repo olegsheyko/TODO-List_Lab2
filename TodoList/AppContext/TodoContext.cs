@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TODO_List.Model;
-using TODO_List.Presenter;
 
 namespace TODO_List.AppContext;
 
@@ -12,8 +11,11 @@ public class TodoContext: DbContext
     {
         Database.EnsureCreated();
     }
-    
-    public TodoContext() {}
+
+    public TodoContext()
+    {
+        Database.EnsureCreated();
+    }
 
     protected override void OnConfiguring(DbContextOptionsBuilder options)
         => options.UseSqlite("Data Source=todo.db");

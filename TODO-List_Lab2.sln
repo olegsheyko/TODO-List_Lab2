@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestForTODO", "TestForTODO\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LR4Web", "LR4Web\LR4Web.csproj", "{BF6AE90F-DD97-470F-A422-936AD185C0E1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LR5Desktop", "LR5Desktop\LR5Desktop.csproj", "{64A27325-6541-404F-BF2B-D4334805494E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{BF6AE90F-DD97-470F-A422-936AD185C0E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF6AE90F-DD97-470F-A422-936AD185C0E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BF6AE90F-DD97-470F-A422-936AD185C0E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64A27325-6541-404F-BF2B-D4334805494E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64A27325-6541-404F-BF2B-D4334805494E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64A27325-6541-404F-BF2B-D4334805494E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64A27325-6541-404F-BF2B-D4334805494E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
